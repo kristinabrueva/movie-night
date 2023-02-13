@@ -1,19 +1,50 @@
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import { useEffect, useState } from "react";
+import MovieList from "../components/movie-list";
+
+export type MovieType = {
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: number[];
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+};
 
 export default function Home() {
+  const [movies, setMovies] = useState<MovieType[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const fetchUsers = async () => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_MOVIE_API_URL}/movie/top_rated?api_key=${process.env.NEXT_PUBLIC_MOVIE_API_TOKEN}&language=en-US&page=1`
+    );
+
+    const data = await response.json();
+    setLoading(false);
+    setMovies(data.results);
+  };
+
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
-        <title>Movies</title>
+        <title>Home</title>
         <meta name="description" content="Popular movies" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>Popular Movies</h1>
-        <div className={styles.grid}></div>
-      </main>
+      {loading ? <div>Loading data...</div> : <MovieList movies={movies} />}
     </div>
   );
 }
