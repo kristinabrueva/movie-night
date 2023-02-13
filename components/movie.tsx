@@ -1,6 +1,7 @@
 import React from "react";
 import * as AspectRatio from "@radix-ui/react-aspect-ratio";
 import Image from "next/image";
+import { formatDate } from "../helpers/helpers";
 
 interface MovieProps {
   poster_path: string;
@@ -39,13 +40,16 @@ export const Movie: React.FunctionComponent<MovieProps> = ({
       <div
         style={{
           padding: "10px",
+          paddingTop: "30px",
           display: "flex",
           gap: "10px",
           flexDirection: "column",
         }}
       >
         <div style={{ fontWeight: "600" }}>{title}</div>
-        <div style={{ fontWeight: "200", color: "gray" }}>{release_date}</div>
+        <div style={{ fontWeight: "200", color: "gray" }}>
+          {formatDate(release_date)}
+        </div>
       </div>
     </div>
   );
