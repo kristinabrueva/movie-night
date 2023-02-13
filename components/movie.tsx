@@ -1,5 +1,6 @@
 import React from "react";
 import * as AspectRatio from "@radix-ui/react-aspect-ratio";
+import Image from "next/image";
 
 interface MovieProps {
   poster_path: string;
@@ -15,16 +16,37 @@ export const Movie: React.FunctionComponent<MovieProps> = ({
   poster_path,
 }) => {
   return (
-    <div>
-      <AspectRatio.Root ratio={9 / 9}>
-        <img
+    <div
+      style={{
+        maxHeight: "100%",
+        width: "150px",
+        position: "relative",
+        paddingBottom: "15px",
+        borderRadius: "15px",
+        overflow: "hidden",
+
+        boxShadow: "5px 5px 10px lightgrey",
+      }}
+    >
+      <AspectRatio.Root ratio={9 / 12}>
+        <Image
+          fill
           src={`${process.env.NEXT_PUBLIC_MOVIE_API_IMAGES_URL}${poster_path}`}
           alt={`${title} poster`}
         />
       </AspectRatio.Root>
-      <div>{title}</div>
-      <div>{vote_average}</div>
-      <div>{release_date}</div>
+      {/* <div>{vote_average}</div> */}
+      <div
+        style={{
+          padding: "10px",
+          display: "flex",
+          gap: "10px",
+          flexDirection: "column",
+        }}
+      >
+        <div style={{ fontWeight: "600" }}>{title}</div>
+        <div style={{ fontWeight: "200", color: "gray" }}>{release_date}</div>
+      </div>
     </div>
   );
 };
