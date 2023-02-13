@@ -22,6 +22,7 @@ export type MovieType = {
 export default function Home() {
   const [movies, setMovies] = useState<MovieType[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     fetchUsers();
@@ -32,10 +33,16 @@ export default function Home() {
       `${process.env.NEXT_PUBLIC_MOVIE_API_URL}/movie/top_rated?api_key=${process.env.NEXT_PUBLIC_MOVIE_API_TOKEN}&language=en-US&page=1`
     );
 
+    if (!response.ok) setError(true);
+
     const data = await response.json();
-    setLoading(false);
     setMovies(data.results);
+    setLoading(false);
   };
+
+  if (error) {
+    return <div>Ooops, something went wrong...</div>;
+  }
 
   return (
     <div>
