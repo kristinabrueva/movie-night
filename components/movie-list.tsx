@@ -2,37 +2,15 @@ import React from "react";
 import Movie from "./movie";
 import { MovieType } from "../pages";
 
-interface moviesProps {
+const MovieList: React.FunctionComponent<{
   movies: MovieType[];
-}
-
-const MovieList: React.FunctionComponent<moviesProps> = ({ movies }) => {
+}> = ({ movies }) => {
   return (
-    <div
-      style={{
-        padding: "50px",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: "30px",
-      }}
-    >
-      <h1>The most popular movies</h1>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
-          gap: "20px",
-        }}
-      >
+    <div className="p-14 flex flex-col items-center gap-8">
+      <h1 className="text-4xl font-bold pb-5">Popular movies</h1>
+      <div className="grid gap-6 grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
         {movies.map((movie, id) => (
-          <Movie
-            key={id}
-            poster_path={movie.poster_path}
-            release_date={movie.release_date}
-            title={movie.title}
-            vote_average={movie.vote_average}
-          />
+          <Movie key={id} movie={movie} />
         ))}
       </div>
     </div>

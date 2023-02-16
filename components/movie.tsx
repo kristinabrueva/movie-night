@@ -1,57 +1,65 @@
-import React from "react";
+import React, { useState } from "react";
 import * as AspectRatio from "@radix-ui/react-aspect-ratio";
 import Image from "next/image";
 import { formatDate } from "../helpers/helpers";
+import RatingBadge from "./ratingBadge";
+import * as Dialog from "@radix-ui/react-dialog";
+import clsx from "clsx";
+import { MovieType } from "../pages";
 
-interface MovieProps {
-  poster_path: string;
-  release_date: string;
-  title: string;
-  vote_average: number;
-}
-
-export const Movie: React.FunctionComponent<MovieProps> = ({
-  title,
-  vote_average,
-  release_date,
-  poster_path,
-}) => {
+export const Movie: React.FunctionComponent<{
+  movie: MovieType;
+}> = ({ movie }) => {
+  const [open, setOpen] = useState(false);
+  const { title, poster_path, vote_average, release_date, overview } = movie;
   return (
-    <div
-      style={{
-        maxHeight: "100%",
-        width: "150px",
-        position: "relative",
-        paddingBottom: "15px",
-        borderRadius: "15px",
-        overflow: "hidden",
-
-        boxShadow: "5px 5px 10px lightgrey",
-      }}
-    >
-      <AspectRatio.Root ratio={9 / 12}>
-        <Image
-          fill
-          src={`${process.env.NEXT_PUBLIC_MOVIE_API_IMAGES_URL}${poster_path}`}
-          alt={`${title} poster`}
-        />
-      </AspectRatio.Root>
-      {/* <div>{vote_average}</div> */}
-      <div
-        style={{
-          padding: "10px",
-          paddingTop: "30px",
-          display: "flex",
-          gap: "10px",
-          flexDirection: "column",
-        }}
-      >
-        <div style={{ fontWeight: "600" }}>{title}</div>
-        <div style={{ fontWeight: "200", color: "gray" }}>
-          {formatDate(release_date)}
+    <Dialog.Root open={open} onOpenChange={setOpen}>
+      <Dialog.Trigger asChild>
+        <div className="max-h-full w-32 sm:w-44 relative pb-4 overflow-hidden rounded-2xl shadow">
+          <div className="relative">
+            <AspectRatio.Root ratio={9 / 12}>
+              <Image
+                fill
+                src={`${process.env.NEXT_PUBLIC_MOVIE_API_IMAGES_URL}${poster_path}`}
+                alt={`${title} poster`}
+              />
+            </AspectRatio.Root>
+            <RatingBadge rating={vote_average} />
+          </div>
+          <div className="px-3 pb-3 pt-6 flex gap-0 flex-col">
+            <h2 className="font-semibold text-base">{title}</h2>
+            <div
+              className=" font-light text-sm text-gray-400"
+              style={{ fontWeight: "200", color: "gray" }}
+            >
+              {formatDate(release_date)}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      </Dialog.Trigger>
+      <Dialog.Portal>
+        <Dialog.Overlay
+          className={clsx("bg-black bg-opacity-20 fixed inset-0")}
+        />
+        <Dialog.Content
+          className={clsx(
+            "bg-white rounded-md fixed top-1/4 left-3 w-fit overflow-scroll p-7"
+          )}
+        >
+          <AspectRatio.Root ratio={9 / 12}>
+            <Image
+              width={50}
+              height={50}
+              src={`${process.env.NEXT_PUBLIC_MOVIE_API_IMAGES_URL}${poster_path}`}
+              alt={`${title} poster`}
+            />
+          </AspectRatio.Root>
+          <Dialog.Title>{title}</Dialog.Title>
+          <Dialog.Description>{overview}</Dialog.Description>
+          <RatingBadge rating={vote_average} />
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 };
 

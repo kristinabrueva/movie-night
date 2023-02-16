@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import MovieList from "../components/movie-list";
 
-export type MovieType = {
+export interface MovieType {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
@@ -17,7 +17,7 @@ export type MovieType = {
   video: boolean;
   vote_average: number;
   vote_count: number;
-};
+}
 
 export default function Home() {
   const [movies, setMovies] = useState<MovieType[]>([]);
@@ -30,7 +30,7 @@ export default function Home() {
 
   const fetchUsers = async () => {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_MOVIE_API_URL}/movie/top_rated?api_key=${process.env.NEXT_PUBLIC_MOVIE_API_TOKEN}&language=en-US&page=1`
+      `${process.env.NEXT_PUBLIC_MOVIE_API_URL}/movie/popular?api_key=${process.env.NEXT_PUBLIC_MOVIE_API_TOKEN}&language=en-US&page=1`
     );
 
     if (!response.ok) setError(true);
