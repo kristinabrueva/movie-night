@@ -5,7 +5,7 @@ import { formatDate } from "../helpers/helpers";
 import RatingBadge from "./ratingBadge";
 import * as Dialog from "@radix-ui/react-dialog";
 import clsx from "clsx";
-import { MovieType } from "../pages";
+import { MovieType } from "../types";
 
 export const Movie: React.FunctionComponent<{
   movie: MovieType;
