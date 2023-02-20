@@ -12,17 +12,17 @@ export const Movie: React.FunctionComponent<{
 }> = ({ movie }) => {
   const [open, setOpen] = useState(false);
   const { title, poster_path, vote_average, release_date, overview } = movie;
+  const poster = poster_path
+    ? `${process.env.NEXT_PUBLIC_MOVIE_API_IMAGES_URL}${poster_path}`
+    : "https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg";
+
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
         <div className="max-h-full w-32 sm:w-44 relative pb-4 overflow-hidden rounded-2xl shadow">
           <div className="relative">
             <AspectRatio.Root ratio={9 / 12}>
-              <Image
-                fill
-                src={`${process.env.NEXT_PUBLIC_MOVIE_API_IMAGES_URL}${poster_path}`}
-                alt={`${title} poster`}
-              />
+              <Image fill src={poster} alt={`${title} poster`} />
             </AspectRatio.Root>
             <RatingBadge rating={vote_average} />
           </div>
@@ -50,7 +50,7 @@ export const Movie: React.FunctionComponent<{
             <Image
               width={50}
               height={50}
-              src={`${process.env.NEXT_PUBLIC_MOVIE_API_IMAGES_URL}${poster_path}`}
+              src={poster}
               alt={`${title} poster`}
             />
           </AspectRatio.Root>
