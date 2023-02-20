@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import MovieList from "../components/movie-list";
 import { MovieContext } from "../context/MovieContext";
 import { MovieType } from "../types";
+import SearchPanel from "../components/searchPanel";
 
 export default function Home() {
   const [movies, setMovies] = useState<MovieType[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const contextValue = { movies, setMovies };
 
   useEffect(() => {
     fetchMovies();
@@ -30,13 +32,14 @@ export default function Home() {
   }
 
   return (
-    <MovieContext.Provider value={movies}>
+    <MovieContext.Provider value={contextValue}>
       <div>
         <Head>
           <title>Home</title>
           <meta name="description" content="Popular movies" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
+        <SearchPanel />
         {loading ? <div>Loading data...</div> : <MovieList />}
       </div>
     </MovieContext.Provider>
