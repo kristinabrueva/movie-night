@@ -14,29 +14,18 @@ export const SearchPanel: React.FunctionComponent = () => {
   };
 
   return (
-    <div className={clsx("max-w-side-panel p-3 gap-4 flex flex-col")}>
-      <div
+    <div className={clsx("max-w-side-panel p-3")}>
+      <input
         className={clsx(
-          "flex flex-col gap-2 max-w-side-panel  p-3 shadow-block border rounded-md"
+          "border border-slate-300 rounded-md py-1.5 px-2 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-light-blue focus:ring-1 focus:ring-light-blue"
         )}
-      >
-        <fieldset className={clsx("flex flex-col gap-2 max-w-xs")}>
-          <label className={clsx(" font-light text-base")} htmlFor="movie">
-            Search
-          </label>
-          <input
-            className={clsx(
-              "border border-slate-300 rounded-md py-1.5 px-2 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-light-blue focus:ring-1 focus:ring-light-blue"
-            )}
-            id="movie"
-            placeholder="Search by title..."
-            onChange={(e) => {
-              setInputValue(e.target.value);
-            }}
-          />
-        </fieldset>
-      </div>
-      <div>
+        id="movie"
+        placeholder="Search by title..."
+        onChange={(e) => {
+          setInputValue(e.target.value);
+        }}
+      />
+      <div className={clsx("mt-4")}>
         <button
           className={clsx(
             "border bg-light-blue text-white h-11 p-y-2 w-full  rounded-full "

@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import Movie from "./movie";
-import { MovieContext } from "../context/MovieContext";
+import { useMovieContext } from "../context/MovieContext";
 
 const MovieList: React.FunctionComponent = () => {
-  const { movies } = useContext(MovieContext);
+  const { movies } = useMovieContext();
 
   return (
     <div className="p-14 flex flex-col items-center gap-8">

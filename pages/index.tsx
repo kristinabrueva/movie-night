@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import MovieList from "../components/movie-list";
 import { MovieContext } from "../context/MovieContext";
 import { MovieType } from "../types";
-import SearchPanel from "../components/searchPanel";
+import clsx from "clsx";
+import SortPanel from "../components/sortPanel";
 
 export default function Home() {
   const [movies, setMovies] = useState<MovieType[]>([]);
@@ -39,8 +40,10 @@ export default function Home() {
           <meta name="description" content="Popular movies" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <SearchPanel />
-        {loading ? <div>Loading data...</div> : <MovieList />}
+        <div className={clsx("flex gap-2")}>
+          <SortPanel />
+          {loading ? <div>Loading data...</div> : <MovieList />}
+        </div>
       </div>
     </MovieContext.Provider>
   );
