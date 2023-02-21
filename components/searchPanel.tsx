@@ -6,11 +6,13 @@ export const SearchPanel: React.FunctionComponent = () => {
   const { setMovies } = useMovieContext();
   const [inputValue, setInputValue] = useState<string>("");
   const handleSearch = async () => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_MOVIE_API_URL}/search/movie?api_key=${process.env.NEXT_PUBLIC_MOVIE_API_TOKEN}&query=${inputValue}`
-    );
-    const data = await response.json();
-    setMovies(data.results);
+    if (inputValue) {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_MOVIE_API_URL}/search/movie?api_key=${process.env.NEXT_PUBLIC_MOVIE_API_TOKEN}&query=${inputValue}`
+      );
+      const data = await response.json();
+      setMovies(data.results);
+    }
   };
 
   return (
