@@ -12,6 +12,7 @@ module.exports = {
       },
       colors: {
         "light-blue": "#01b4e4",
+        "dark-blue": "#03213A",
       },
       boxShadow: {
         block: "1px 1px 3px 0 rgba(0, 0, 0, 0.1)",
