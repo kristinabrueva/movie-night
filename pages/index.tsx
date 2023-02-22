@@ -9,27 +9,54 @@ import SortPanel from "../components/sortPanel";
 export default function Home() {
   const [movies, setMovies] = useState<MovieType[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<string>("");
+
   const contextValue = { movies, setMovies };
 
+  const fetchUrl = `${process.env.NEXT_PUBLIC_MOVIE_API_URL}/movie/popular?api_key=${process.env.NEXT_PUBLIC_MOVIE_API_TOKEN}&language=en-US&page=`;
+
   useEffect(() => {
-    fetchMovies();
-  }, []);
-
-  const fetchMovies = async () => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_MOVIE_API_URL}/movie/popular?api_key=${process.env.NEXT_PUBLIC_MOVIE_API_TOKEN}&language=en-US&page=1`
+    const moviePromises = [1, 2, 3, 4, 5].map((obj) =>
+      fetch(`${fetchUrl}${obj}`).then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        return res.json();
+      })
     );
+    Promise.all(moviePromises)
+      .then((data) => {
+        setMovies(data.flatMap((i) => i.results));
+        setLoading(false);
+      })
+      .catch((e) => {
+        setError(e.message);
+      });
+  }, [fetchUrl]);
 
-    if (!response.ok) setError(true);
+  if (!!error) {
+    return (
+      <div
+        className={
+          "text-2xl align-middle h-screen justify-center flex flex-col gap-4 items-center"
+        }
+      >
+        <span>Ooops... {error} </span>
+        <span> Refresh your page or try again later.</span>
+      </div>
+    );
+  }
 
-    const data = await response.json();
-    setMovies(data.results);
-    setLoading(false);
-  };
-
-  if (error) {
-    return <div>Ooops, something went wrong...</div>;
+  if (loading) {
+    return (
+      <div
+        className={
+          "text-2xl align-middle h-screen justify-center flex flex-col gap-4 items-center"
+        }
+      >
+        <span>Loading...</span>
+      </div>
+    );
   }
 
   return (
@@ -42,7 +69,7 @@ export default function Home() {
         </Head>
         <div className={clsx("flex gap-2")}>
           <SortPanel />
-          {loading ? <div>Loading data...</div> : <MovieList />}
+          <MovieList />
         </div>
       </div>
     </MovieContext.Provider>
