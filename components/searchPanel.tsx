@@ -8,14 +8,14 @@ export const SearchPanel: React.FunctionComponent = () => {
 
   const handleSearch = async () => {
     if (inputValue) {
-      setSearchResults(
-        {
-          results: [...movies].filter((e) =>
+      setSearchResults({
+        results:
+          [...movies].filter((e) =>
             e.title.toLowerCase().includes(inputValue.toLowerCase())
-          ),
-        } || { results: [], query: inputValue }
-      );
-    } else setSearchResults({ results: [], query: "" });
+          ) || [],
+        query: inputValue,
+      });
+    } else setSearchResults({ results: movies, query: "" });
   };
 
   return (

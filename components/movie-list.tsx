@@ -24,9 +24,17 @@ const MovieList: React.FunctionComponent = () => {
   return (
     <div className="p-14 flex flex-col items-center gap-8 w-full">
       <h1 className="text-4xl font-bold pb-5">Popular movies</h1>
+      {searchResults.query && (
+        <div className="text-lg self-start text-slate-500">
+          Search results for{" "}
+          <span className=" italic text-black">
+            &apos;{searchResults.query}&apos;
+          </span>
+        </div>
+      )}
       {!searchResults.results.length && (
         <div className={"text-2xlh-screenflex flex-col gap-4"}>
-          Sorry, no results for your search
+          Sorry, movies have been found
         </div>
       )}
       <div className="grid gap-6 grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
