@@ -24,7 +24,7 @@ export const Movie: React.FunctionComponent<{
             <AspectRatio.Root ratio={9 / 12}>
               <Image fill src={poster} alt={`${title} poster`} />
             </AspectRatio.Root>
-            <RatingBadge rating={Math.round(vote_average)} />
+            <RatingBadge rating={vote_average} />
           </div>
           <div className="px-3 pb-3 pt-6 flex gap-0 flex-col">
             <h2 className="font-semibold text-base">{title}</h2>
@@ -56,7 +56,7 @@ export const Movie: React.FunctionComponent<{
           </AspectRatio.Root>
           <Dialog.Title>{title}</Dialog.Title>
           <Dialog.Description>{overview}</Dialog.Description>
-          <RatingBadge rating={Math.round(vote_average)} />
+          <RatingBadge rating={vote_average} />
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
