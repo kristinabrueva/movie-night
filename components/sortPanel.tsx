@@ -41,7 +41,9 @@ const SelectItem: React.FunctionComponent<{ title: string; value: string }> = ({
 );
 
 export const SortPanel: React.FunctionComponent = () => {
-  const { movies, setMovies } = useMovieContext();
+  const { setSearchResults, searchResults } = useMovieContext();
+
+  const { results } = searchResults;
 
   const selectValues = [
     { value: "popularAsc", title: "Popular Ascending" },
@@ -55,25 +57,25 @@ export const SortPanel: React.FunctionComponent = () => {
   const handleSort = (value: string) => {
     switch (value) {
       case "popularAsc":
-        setMovies(sortPopularAsc(movies));
+        setSearchResults(sortPopularAsc(results));
         break;
       case "popularDesc":
-        setMovies(sortPopularDesc(movies));
+        setSearchResults(sortPopularDesc(results));
         break;
       case "ratingAsc":
-        setMovies(sortAsc(movies));
+        setSearchResults(sortAsc(results));
         break;
       case "ratingDesc":
-        setMovies(sortDesc(movies));
+        setSearchResults(sortDesc(results));
         break;
       case "titleAsc":
-        setMovies(sortTitleAsc(movies));
+        setSearchResults(sortTitleAsc(results));
         break;
       case "titleDesc":
-        setMovies(sortTitleDesc(movies));
+        setSearchResults(sortTitleDesc(results));
         break;
       default:
-        setMovies(sortTitleAsc(movies));
+        setSearchResults(sortPopularDesc(results));
     }
   };
 

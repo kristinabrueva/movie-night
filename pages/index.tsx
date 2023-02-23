@@ -8,10 +8,19 @@ import SortPanel from "../components/sortPanel";
 
 export default function Home() {
   const [movies, setMovies] = useState<MovieType[]>([]);
+  const [searchResults, setSearchResults] = useState<{
+    results: MovieType[];
+    query?: string;
+  }>({ results: [] });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>("");
 
-  const contextValue = { movies, setMovies };
+  const contextValue = {
+    movies,
+    searchResults,
+    setMovies,
+    setSearchResults,
+  };
 
   const fetchUrl = `${process.env.NEXT_PUBLIC_MOVIE_API_URL}/movie/popular?api_key=${process.env.NEXT_PUBLIC_MOVIE_API_TOKEN}&language=en-US&page=`;
 
@@ -26,7 +35,9 @@ export default function Home() {
     );
     Promise.all(moviePromises)
       .then((data) => {
-        setMovies(data.flatMap((i) => i.results));
+        const res = data.flatMap((i) => i.results);
+        setMovies(res);
+        setSearchResults({ results: res });
         setLoading(false);
       })
       .catch((e) => {

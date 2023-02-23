@@ -5,25 +5,30 @@ import { MovieType } from "../types";
 
 const MovieList: React.FunctionComponent = () => {
   const moviesPerPage = 20;
-  const { movies } = useMovieContext();
+  const { movies, searchResults } = useMovieContext();
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = movies.length / moviesPerPage;
+  const totalMovies = searchResults.results.length;
+  const totalPages = totalMovies / moviesPerPage;
   const [currentMovies, setCurrentMovies] = useState<MovieType[]>([]);
 
   const indexOfLastMovie = currentPage * moviesPerPage;
 
   useEffect(() => {
-    setCurrentMovies(movies.slice(0, indexOfLastMovie));
-  }, [currentPage, indexOfLastMovie]);
+    setCurrentPage(1);
+  }, [searchResults]);
 
   useEffect(() => {
-    setCurrentPage(1);
-    setCurrentMovies(movies.slice(0, indexOfLastMovie));
-  }, [movies]);
+    setCurrentMovies(searchResults.results.slice(0, indexOfLastMovie));
+  }, [currentPage, indexOfLastMovie, searchResults]);
 
   return (
     <div className="p-14 flex flex-col items-center gap-8 w-full">
       <h1 className="text-4xl font-bold pb-5">Popular movies</h1>
+      {!searchResults.results.length && (
+        <div className={"text-2xlh-screenflex flex-col gap-4"}>
+          Sorry, no results for your search
+        </div>
+      )}
       <div className="grid gap-6 grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
         {currentMovies.map((movie, id) => (
           <Movie key={id} movie={movie} />
