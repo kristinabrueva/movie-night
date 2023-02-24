@@ -3,19 +3,20 @@ import { useEffect, useState } from "react";
 import MovieList from "../components/movie-list";
 import { MovieContext } from "../context/MovieContext";
 import { MovieType } from "../types";
-import clsx from "clsx";
 import SortPanel from "../components/sortPanel";
 
 export default function Home() {
   const [movies, setMovies] = useState<MovieType[]>([]);
+
   const [searchResults, setSearchResults] = useState<{
     results: MovieType[];
     query?: string;
   }>({ results: [] });
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>("");
 
-  const contextValue = {
+  const contextMovieValue = {
     movies,
     searchResults,
     setMovies,
@@ -28,7 +29,7 @@ export default function Home() {
     const moviePromises = [1, 2, 3, 4, 5].map((obj) =>
       fetch(`${fetchUrl}${obj}`).then((res) => {
         if (!res.ok) {
-          throw new Error("Failed to fetch data");
+          throw new Error("Failed to fetch movie data");
         }
         return res.json();
       })
@@ -71,14 +72,14 @@ export default function Home() {
   }
 
   return (
-    <MovieContext.Provider value={contextValue}>
+    <MovieContext.Provider value={contextMovieValue}>
       <div>
         <Head>
           <title>Home</title>
           <meta name="description" content="Popular movies" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <div className={clsx("flex gap-2")}>
+        <div className={"flex gap-2"}>
           <SortPanel />
           <MovieList />
         </div>
