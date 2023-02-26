@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useMovieContext } from "../context/MovieContext";
-import clsx from "clsx";
 
 export const SearchPanel: React.FunctionComponent = () => {
   const { movies, setSearchResults } = useMovieContext();
@@ -19,28 +18,32 @@ export const SearchPanel: React.FunctionComponent = () => {
   };
 
   return (
-    <div className={clsx("max-w-side-panel p-3")}>
+    <form className={"max-w-side-panel p-3"}>
       <input
-        className={clsx(
-          "border border-slate-300 rounded-md py-1.5 px-2 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-light-blue focus:ring-1 focus:ring-light-blue"
-        )}
         id="movie"
+        autoFocus
         placeholder="Search by title..."
         onChange={(e) => {
           setInputValue(e.target.value);
         }}
+        className={
+          "border border-slate-300 rounded-md py-1.5 px-2 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-light-blue focus:ring-1 focus:ring-light-blue"
+        }
       />
-      <div className={clsx("mt-4")}>
+      <div className={"mt-4"}>
         <button
-          className={clsx(
-            "border bg-light-blue text-white h-11 p-y-2 w-full  rounded-full "
-          )}
-          onClick={() => handleSearch()}
+          className={
+            "border bg-light-blue text-white h-11 p-y-2 w-full rounded-full"
+          }
+          onClick={(e) => {
+            e.preventDefault();
+            handleSearch();
+          }}
         >
           Search
         </button>
       </div>
-    </div>
+    </form>
   );
 };
 
