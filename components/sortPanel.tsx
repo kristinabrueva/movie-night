@@ -3,7 +3,6 @@ import * as Accordion from "@radix-ui/react-accordion";
 import * as Select from "@radix-ui/react-select";
 import { clsx } from "clsx";
 import { ChevronDownIcon, ChevronRightIcon } from "@radix-ui/react-icons";
-import SearchPanel from "./searchPanel";
 import { useMovieContext } from "../context/MovieContext";
 import {
   sortAsc,
@@ -80,76 +79,54 @@ export const SortPanel: React.FunctionComponent = () => {
   };
 
   return (
-    <Accordion.Root type="multiple" className={clsx("w-side-panel p-3 mt-10")}>
-      <Accordion.Item
-        value="item-1"
+    <>
+      <div
         className={clsx(
-          "flex flex-col gap-2 max-w-side-panel p-3 mb-4 shadow-block border rounded-md"
+          "font-light text-base border border-b-0 border-x-0 border-slate-300"
         )}
       >
-        <PanelItem title="Sort" />
-        <Accordion.Content>
-          <div
-            className={clsx(
-              "font-light text-base border border-b-0 border-x-0 border-slate-300"
-            )}
-          >
-            Sort Results By
-          </div>
-          <Select.Root
-            defaultValue="titleAsc"
-            onValueChange={(e) => {
-              handleSort(e);
-            }}
-          >
-            <Select.Trigger
-              aria-label="Sort"
-              className={clsx(
-                "flex space-x-0 bg-slate-300 text-xs w-full h-5 p-4 border border-slate-300 rounded-md relative"
-              )}
-            >
-              <Select.Value
-                className={clsx("flex w-full font-semibold align-baseline ")}
-              />
-              <ChevronDownIcon />
-            </Select.Trigger>
-
-            <Select.Portal
-              className={clsx(
-                "bg-white border border-slate-300 rounded-md relative "
-              )}
-            >
-              <Select.Content className={clsx("absolute inset-x-0 -bottom-20")}>
-                <Select.ScrollUpButton />
-                <Select.Viewport>
-                  {selectValues.map((item) => (
-                    <SelectItem
-                      key={item.value}
-                      value={item.value}
-                      title={item.title}
-                    />
-                  ))}
-                </Select.Viewport>
-                <Select.ScrollDownButton />
-                <Select.Arrow />
-              </Select.Content>
-            </Select.Portal>
-          </Select.Root>
-        </Accordion.Content>
-      </Accordion.Item>
-
-      <Accordion.Item
-        value="item-2"
-        className={clsx(
-          "flex flex-col gap-2 max-w-side-panel p-3 mb-4 shadow-block border rounded-md"
-        )}
+        Sort Results By
+      </div>
+      <Select.Root
+        defaultValue="titleAsc"
+        onValueChange={(e) => {
+          handleSort(e);
+        }}
       >
-        <PanelItem title="Search" />
-        <Accordion.Content>
-          <SearchPanel />
-        </Accordion.Content>
-      </Accordion.Item>
-    </Accordion.Root>
+        <Select.Trigger
+          aria-label="Sort"
+          className={clsx(
+            "flex space-x-0 bg-slate-300 text-xs w-full h-5 p-4 border border-slate-300 rounded-md relative"
+          )}
+        >
+          <Select.Value
+            className={clsx("flex w-full font-semibold align-baseline ")}
+          />
+          <ChevronDownIcon />
+        </Select.Trigger>
+
+        <Select.Portal
+          className={clsx(
+            "bg-white border border-slate-300 rounded-md relative "
+          )}
+        >
+          <Select.Content className={clsx("absolute inset-x-0 -bottom-20")}>
+            <Select.ScrollUpButton />
+            <Select.Viewport>
+              {selectValues.map((item) => (
+                <SelectItem
+                  key={item.value}
+                  value={item.value}
+                  title={item.title}
+                />
+              ))}
+            </Select.Viewport>
+            <Select.ScrollDownButton />
+            <Select.Arrow />
+          </Select.Content>
+        </Select.Portal>
+      </Select.Root>
+    </>
   );
 };
 

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import MovieList from "../components/movie-list";
 import { MovieContext } from "../context/MovieContext";
 import { MovieType } from "../types";
-import SortPanel from "../components/sortPanel";
+import SidePanel from "../components/sidePanel";
 
 export default function Home() {
   const [movies, setMovies] = useState<MovieType[]>([]);
@@ -73,16 +73,14 @@ export default function Home() {
 
   return (
     <MovieContext.Provider value={contextMovieValue}>
-      <div>
-        <Head>
-          <title>Home</title>
-          <meta name="description" content="Popular movies" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <div className={"flex gap-2"}>
-          <SortPanel />
-          <MovieList />
-        </div>
+      <Head>
+        <title>Home</title>
+        <meta name="description" content="Popular movies" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <div className={"flex flex-col sm:flex-row gap-2"}>
+        <SidePanel />
+        <MovieList />
       </div>
     </MovieContext.Provider>
   );
