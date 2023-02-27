@@ -53,7 +53,9 @@ export const MovieModal: React.FunctionComponent<{
             </div>
             <div className="flex sm:gap-2 gap-1 sm:pt-0 pt-4 w-fit sm:text-xs text-black uppercase  overflow-hidden">
               {genre_ids &&
-                getMovieGenres(genre_ids).map((i) => <Tag text={i} />)}
+                getMovieGenres(genre_ids).map((i, index) => (
+                  <Tag text={i} key={index} />
+                ))}
             </div>
             <Dialog.Description className="text-2xs leading-snug">
               {overview}
