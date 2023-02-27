@@ -1,6 +1,6 @@
 import React from "react";
 import * as Select from "@radix-ui/react-select";
-import { ChevronDownIcon } from "@radix-ui/react-icons";
+import { ChevronRightIcon } from "@radix-ui/react-icons";
 import { useMovieContext } from "../context/MovieContext";
 import {
   sortAsc,
@@ -55,7 +55,7 @@ export const SortPanel: React.FunctionComponent = () => {
     <>
       <div
         className={
-          "font-light text-base border border-b-0 border-x-0 border-slate-300"
+          "font-extralight text-black py-2 border border-b-0 border-x-0 border-slate-300"
         }
       >
         Sort Results By
@@ -69,19 +69,23 @@ export const SortPanel: React.FunctionComponent = () => {
         <Select.Trigger
           aria-label="Sort"
           className={
-            "flex space-x-0 bg-slate-300 text-xs w-full h-5 p-4 border border-slate-300 rounded-md relative"
+            "group flex space-x-0 bg-slate-100 text-xs w-full h-5 p-4 border border-slate-300 rounded-md relative items-center"
           }
         >
-          <Select.Value
-            className={"flex w-full font-semibold align-baseline"}
+          <span className={"flex w-full"}>
+            <Select.Value />
+          </span>
+          <ChevronRightIcon
+            className={
+              "group-data-state-open:rotate-90 radix-state-open:duration-300"
+            }
           />
-          <ChevronDownIcon />
         </Select.Trigger>
 
         <Select.Portal
           className={"bg-white border border-slate-300 rounded-md relative"}
         >
-          <Select.Content className={"absolute inset-x-0 -bottom-20"}>
+          <Select.Content className={"absolute inset-x-0 -bottom-20 z-30"}>
             <Select.ScrollUpButton />
             <Select.Viewport>
               {selectValues.map((item) => (

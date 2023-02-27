@@ -29,10 +29,7 @@ export const Movie: React.FunctionComponent<{
           </div>
           <div className="px-3 pb-3 pt-6 flex gap-0 flex-col">
             <h2 className="font-semibold text-base">{title}</h2>
-            <div
-              className=" font-light text-sm text-gray-400"
-              style={{ fontWeight: "200", color: "gray" }}
-            >
+            <div className={"font-light text-sm text-slate-500"}>
               {formatDate(release_date)}
             </div>
           </div>

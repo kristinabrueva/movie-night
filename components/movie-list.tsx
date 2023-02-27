@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-import Movie from "./movie";
 import { useMovieContext } from "../context/MovieContext";
 import { MovieType } from "../types";
+import Movie from "./movie";
 
 const MovieList: React.FunctionComponent = () => {
   const moviesPerPage = 20;
@@ -43,7 +43,7 @@ const MovieList: React.FunctionComponent = () => {
       {currentPage < totalPages && (
         <div className="flex w-full">
           <button
-            className="bg-light-blue text-white p-3 rounded-full w-full hover:text-dark-blue font-semibold text-2xl"
+            className="bg-light-blue text-white p-3 rounded-lg w-full hover:text-dark-blue font-semibold text-2xl"
             onClick={() => {
               setCurrentPage(currentPage + 1);
             }}
