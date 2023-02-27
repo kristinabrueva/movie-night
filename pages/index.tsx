@@ -78,7 +78,11 @@ export default function Home() {
         <meta name="description" content="Popular movies" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={"flex flex-col sm:flex-row gap-2"}>
+      <div
+        className={
+          "relative min-h-screen flex flex-col sm:flex-row gap-2 sm:gap-4 p-4 sm:px-6 sm:py-12 items-center sm:items-start"
+        }
+      >
         <SidePanel />
         <MovieList />
       </div>

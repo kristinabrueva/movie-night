@@ -28,7 +28,7 @@ export const SearchPanel: React.FunctionComponent = () => {
           setInputValue(e.target.value);
         }}
         className={
-          "border border-slate-300 rounded-md py-1.5 px-2 text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-light-blue focus:ring-1 focus:ring-light-blue"
+          "border border-slate-300 rounded-md py-1.5 px-2 w-full text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-light-blue focus:ring-1 focus:ring-light-blue"
         }
       />
       <div className={"mt-4"}>

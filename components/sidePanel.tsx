@@ -7,14 +7,19 @@ import SidePanelItem from "./sidePanelItem";
 
 export const SidePanel: React.FunctionComponent = () => {
   return (
-    <Accordion.Root type="multiple" className={"w-side-panel p-3 mt-10"}>
-      <SidePanelItem title="Sort">
-        <SortPanel />
-      </SidePanelItem>
-      <SidePanelItem title="Search">
-        <SearchPanel />
-      </SidePanelItem>
-    </Accordion.Root>
+    <div className="bg-white z-10 min-w-min-side-panel h-fill sticky inset-0 p-3 flex justify-center">
+      <Accordion.Root
+        type="multiple"
+        className={"w-side-panel  sm:static flex flex-col sm:gap-4 gap-2"}
+      >
+        <SidePanelItem title="Sort">
+          <SortPanel />
+        </SidePanelItem>
+        <SidePanelItem title="Search">
+          <SearchPanel />
+        </SidePanelItem>
+      </Accordion.Root>
+    </div>
   );
 };
 

@@ -73,13 +73,13 @@ export const SortPanel: React.FunctionComponent = () => {
           }
         >
           <Select.Value
-            className={"flex w-full font-semibold align-baseline "}
+            className={"flex w-full font-semibold align-baseline"}
           />
           <ChevronDownIcon />
         </Select.Trigger>
 
         <Select.Portal
-          className={"bg-white border border-slate-300 rounded-md relative "}
+          className={"bg-white border border-slate-300 rounded-md relative"}
         >
           <Select.Content className={"absolute inset-x-0 -bottom-20"}>
             <Select.ScrollUpButton />

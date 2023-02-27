@@ -7,6 +7,9 @@ module.exports = {
       maxWidth: {
         "side-panel": "260px",
       },
+      minWidth: {
+        "min-side-panel": "60px",
+      },
       width: {
         "side-panel": "260px",
       },
@@ -16,6 +19,9 @@ module.exports = {
       },
       boxShadow: {
         block: "1px 1px 3px 0 rgba(0, 0, 0, 0.1)",
+      },
+      fontSize: {
+        // xxs: "16px",
       },
     },
   },

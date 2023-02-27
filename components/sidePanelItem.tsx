@@ -11,7 +11,7 @@ const SidePanelItem: React.FunctionComponent<{
     <Accordion.Item
       value={title}
       className={
-        "flex flex-col gap-2 max-w-side-panel p-3 mb-4 shadow-block border rounded-md"
+        "flex flex-col sm:gap-2 max-w-side-panel p-3 shadow-block border rounded-md"
       }
     >
       <Accordion.Trigger className={"group flex font-semibold space-x-0"}>

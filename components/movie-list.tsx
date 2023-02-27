@@ -23,8 +23,7 @@ const MovieList: React.FunctionComponent = () => {
   }, [currentPage, indexOfLastMovie, searchResults]);
 
   return (
-    <div className="p-14 flex flex-col items-center gap-8 w-full">
-      <h1 className="text-4xl font-bold pb-5">Popular movies</h1>
+    <div className="flex flex-col items-center gap-8 w-full z-0">
       {searchResults.query && (
         <div className="text-lg self-start text-slate-500">
           Search results for
@@ -34,9 +33,7 @@ const MovieList: React.FunctionComponent = () => {
         </div>
       )}
       {!searchResults.results.length && (
-        <div className={"text-2xlh-screenflex flex-col gap-4"}>
-          Sorry, movies have been found
-        </div>
+        <div className={"text-2xl"}>Sorry, no movies have been found :(</div>
       )}
       <div className="grid gap-6 grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
         {currentMovies.map((movie, id) => (
