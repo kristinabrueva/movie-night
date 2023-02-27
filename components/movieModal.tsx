@@ -51,7 +51,7 @@ export const MovieModal: React.FunctionComponent<{
             <div className="p-2 sm:pt-0 relative">
               <RatingBadge rating={vote_average} />
             </div>
-            <div className="flex sm:gap-2 gap-1 sm:pt-0 pt-4 w-fit sm:text-xs text-black uppercase  overflow-hidden">
+            <div className="flex flex-col items-start sm:flex-row sm:gap-2 gap-1 sm:pt-0 pt-4 w-fit text-xs text-black sm:uppercase overflow-hidden">
               {genre_ids &&
                 getMovieGenres(genre_ids).map((i, index) => (
                   <Tag text={i} key={index} />

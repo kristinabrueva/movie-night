@@ -23,7 +23,7 @@ const MovieList: React.FunctionComponent = () => {
   }, [currentPage, indexOfLastMovie, searchResults]);
 
   return (
-    <div className="flex flex-col items-center gap-8 w-full z-0">
+    <div className="flex flex-col items-center gap-8 w-full z-0 pt-3">
       {searchResults.query && (
         <div className="text-lg self-start text-slate-500">
           Search results for

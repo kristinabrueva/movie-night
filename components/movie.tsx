@@ -20,15 +20,17 @@ export const Movie: React.FunctionComponent<{
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
-        <div className="max-h-full w-32 sm:w-44 static pb-4 overflow-hidden rounded-2xl shadow">
+        <div className="sm:h-[360px] pb-4 h-[300px] w-32 sm:w-44 overflow-hidden shadow rounded-2xl">
           <div className="relative">
             <AspectRatio.Root ratio={9 / 12}>
               <Image fill src={poster} alt={`${title} poster`} />
             </AspectRatio.Root>
             <RatingBadge rating={vote_average} />
           </div>
-          <div className="px-3 pb-3 pt-6 flex gap-0 flex-col">
-            <h2 className="font-semibold text-base">{title}</h2>
+          <div className="px-3 pb-3 pt-6 flex gap-1 flex-col">
+            <h2 className="font-semibold text-base overflow-scroll h-12">
+              {title}
+            </h2>
             <div className={"font-light text-sm text-slate-500"}>
               {formatDate(release_date)}
             </div>
