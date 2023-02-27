@@ -1,10 +1,10 @@
-import React, { Component, useState } from "react";
-import * as AspectRatio from "@radix-ui/react-aspect-ratio";
+import React from "react";
 import Image from "next/image";
-import { formatDate, getMovieGenres } from "../helpers/helpers";
-import RatingBadge from "./ratingBadge";
 import * as Dialog from "@radix-ui/react-dialog";
+
+import { formatDate, getMovieGenres } from "../helpers/helpers";
 import { MovieType } from "../types";
+import RatingBadge from "./ratingBadge";
 
 export const MovieModal: React.FunctionComponent<{
   movie: MovieType;

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import { useMovieContext } from "../context/MovieContext";
 
 export const SearchPanel: React.FunctionComponent = () => {

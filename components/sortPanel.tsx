@@ -1,8 +1,6 @@
 import React from "react";
-import * as Accordion from "@radix-ui/react-accordion";
 import * as Select from "@radix-ui/react-select";
-import { clsx } from "clsx";
-import { ChevronDownIcon, ChevronRightIcon } from "@radix-ui/react-icons";
+import { ChevronDownIcon } from "@radix-ui/react-icons";
 import { useMovieContext } from "../context/MovieContext";
 import {
   sortAsc,
@@ -12,32 +10,7 @@ import {
   sortTitleAsc,
   sortTitleDesc,
 } from "../helpers/helpers";
-
-const PanelItem: React.FunctionComponent<{ title: string }> = ({ title }) => {
-  return (
-    <Accordion.Trigger className={clsx("group flex font-semibold space-x-0")}>
-      <span className={clsx("flex w-full")}>{title}</span>
-      <ChevronRightIcon
-        className={clsx(
-          "group-data-state-open:rotate-90 radix-state-open:duration-300"
-        )}
-      />
-    </Accordion.Trigger>
-  );
-};
-
-const SelectItem: React.FunctionComponent<{ title: string; value: string }> = ({
-  title,
-  value,
-}) => (
-  <Select.Item
-    value={value}
-    className={clsx("text-xs hover:cursor-pointer hover:bg-slate-300 p-2 pl-4")}
-  >
-    <Select.ItemText>{title}</Select.ItemText>
-    <Select.ItemIndicator />
-  </Select.Item>
-);
+import SelectItem from "./selectItem";
 
 export const SortPanel: React.FunctionComponent = () => {
   const { setSearchResults, searchResults } = useMovieContext();
@@ -81,9 +54,9 @@ export const SortPanel: React.FunctionComponent = () => {
   return (
     <>
       <div
-        className={clsx(
+        className={
           "font-light text-base border border-b-0 border-x-0 border-slate-300"
-        )}
+        }
       >
         Sort Results By
       </div>
@@ -95,22 +68,20 @@ export const SortPanel: React.FunctionComponent = () => {
       >
         <Select.Trigger
           aria-label="Sort"
-          className={clsx(
+          className={
             "flex space-x-0 bg-slate-300 text-xs w-full h-5 p-4 border border-slate-300 rounded-md relative"
-          )}
+          }
         >
           <Select.Value
-            className={clsx("flex w-full font-semibold align-baseline ")}
+            className={"flex w-full font-semibold align-baseline "}
           />
           <ChevronDownIcon />
         </Select.Trigger>
 
         <Select.Portal
-          className={clsx(
-            "bg-white border border-slate-300 rounded-md relative "
-          )}
+          className={"bg-white border border-slate-300 rounded-md relative "}
         >
-          <Select.Content className={clsx("absolute inset-x-0 -bottom-20")}>
+          <Select.Content className={"absolute inset-x-0 -bottom-20"}>
             <Select.ScrollUpButton />
             <Select.Viewport>
               {selectValues.map((item) => (

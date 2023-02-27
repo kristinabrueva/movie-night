@@ -1,5 +1,6 @@
 import React from "react";
 import * as Accordion from "@radix-ui/react-accordion";
+
 import { ChevronRightIcon } from "@radix-ui/react-icons";
 
 const SidePanelItem: React.FunctionComponent<{

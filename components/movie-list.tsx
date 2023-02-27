@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
+
 import Movie from "./movie";
 import { useMovieContext } from "../context/MovieContext";
 import { MovieType } from "../types";
 
 const MovieList: React.FunctionComponent = () => {
   const moviesPerPage = 20;
-  const { movies, searchResults } = useMovieContext();
+  const { searchResults } = useMovieContext();
   const [currentPage, setCurrentPage] = useState(1);
   const totalMovies = searchResults.results.length;
   const totalPages = totalMovies / moviesPerPage;
@@ -26,8 +27,8 @@ const MovieList: React.FunctionComponent = () => {
       <h1 className="text-4xl font-bold pb-5">Popular movies</h1>
       {searchResults.query && (
         <div className="text-lg self-start text-slate-500">
-          Search results for{" "}
-          <span className=" italic text-black">
+          Search results for
+          <span className="italic text-black">
             &apos;{searchResults.query}&apos;
           </span>
         </div>
@@ -45,7 +46,7 @@ const MovieList: React.FunctionComponent = () => {
       {currentPage < totalPages && (
         <div className="flex w-full">
           <button
-            className=" bg-light-blue text-white p-3 rounded-full w-full hover:text-dark-blue font-semibold text-2xl"
+            className="bg-light-blue text-white p-3 rounded-full w-full hover:text-dark-blue font-semibold text-2xl"
             onClick={() => {
               setCurrentPage(currentPage + 1);
             }}
