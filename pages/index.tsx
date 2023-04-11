@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import MovieList from "../components/movie-list";
+import MovieList from "../components/movieList";
 import { MovieContext } from "../context/MovieContext";
 import { MovieType } from "../types";
 import SidePanel from "../components/sidePanel";
@@ -23,9 +23,8 @@ export default function Home() {
     setSearchResults,
   };
 
-  const fetchUrl = `${process.env.NEXT_PUBLIC_MOVIE_API_URL}/movie/popular?api_key=${process.env.NEXT_PUBLIC_MOVIE_API_TOKEN}&language=en-US&page=`;
-
   useEffect(() => {
+    const fetchUrl = `${process.env.NEXT_PUBLIC_MOVIE_API_URL}/movie/popular?api_key=${process.env.NEXT_PUBLIC_MOVIE_API_TOKEN}&language=en-US&page=`;
     const moviePromises = [1, 2, 3, 4, 5].map((obj) =>
       fetch(`${fetchUrl}${obj}`).then((res) => {
         if (!res.ok) {
@@ -44,7 +43,7 @@ export default function Home() {
       .catch((e) => {
         setError(e.message);
       });
-  }, [fetchUrl]);
+  }, []);
 
   if (!!error) {
     return (

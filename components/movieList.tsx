@@ -45,6 +45,7 @@ const MovieList: React.FunctionComponent = () => {
           <button
             className="bg-light-blue text-white p-3 rounded-lg w-full hover:text-dark-blue font-semibold text-2xl"
             onClick={() => {
+              // fetchNextPage()
               setCurrentPage(currentPage + 1);
             }}
           >
