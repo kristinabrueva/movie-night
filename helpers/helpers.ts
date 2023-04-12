@@ -38,8 +38,11 @@ const months = [
 ];
 
 export const formatDate = (originalDate: string): string => {
-  const date = originalDate.split("-").reverse();
-  return date[0] + " " + months[parseInt(date[1]) - 1] + ", " + date[2];
+  if (originalDate) {
+    const date = originalDate.split("-").reverse();
+    return date[0] + " " + months[parseInt(date[1]) - 1] + ", " + date[2];
+  }
+  return "";
 };
 
 export const sortPopularAsc = (movies: MovieType[]) => {
